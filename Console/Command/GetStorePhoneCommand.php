@@ -50,12 +50,8 @@ class GetStorePhoneCommand extends Command
     {
         $exitCode = 0;
 
-//        if ($phone = $input->getOption(self::PHONE)) {
-//            $output->writeln('<info>Store phone is `' . $phone . '`</info>');
-//        }
-
-        $output->writeln('<info>Success message.</info>');
-        $output->writeln('<comment>Some comment.</comment>');
+        // $output->writeln('<info>Success message.</info>');
+        // $output->writeln('<comment>Some comment.</comment>');
 
         try {
             $storePhone = $this->scopeConfig->getValue(
