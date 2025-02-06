@@ -57,16 +57,32 @@ class GetStorePhoneCommand extends Command
         // $output->writeln('<comment>Some comment.</comment>');
 
         try {
-            $storePhone = $this->scopeConfig->getValue(
-                'general/store_information/phone'
-            );
             $currentWebsite = $this->storeManager->getWebsite()->getName();
-            $currentGroup =   $this->storeManager->getGroup()->getName();
-            $currentStore =   $this->storeManager->getStore()->getName();
-            $output->writeln("<info>The store phone is: $storePhone</info>");
+            $currentWebsiteCode = $this->storeManager->getWebsite()->getCode();
+
+            $currentGroup = $this->storeManager->getGroup()->getName();
+            $currentGroupCode = $this->storeManager->getGroup()->getCode();
+
+            $currentStore = $this->storeManager->getStore()->getName();
+            $currentStoreCode = $this->storeManager->getStore()->getCode();
+
+            $scopeType = 'store';
+            $scopeCode = 'default';
+
+            $storePhone = $this->scopeConfig->getValue(
+                'general/store_information/phone',
+                // ScopeConfigInterface::SCOPE_TYPE_DEFAULT,
+                $scopeType,
+                $scopeCode
+            );
+
+            $output->writeln("<info>The store phone for scope type `$scopeType` and scope code `$scopeCode` is: $storePhone</info>");
             $output->writeln("<info>The current website is: $currentWebsite</info>");
+            $output->writeln("<info>The current website code is: $currentWebsiteCode</info>");
             $output->writeln("<info>The current group is: $currentGroup</info>");
+            $output->writeln("<info>The current group code is: $currentGroupCode</info>");
             $output->writeln("<info>The current store is: $currentStore</info>");
+            $output->writeln("<info>The current store code is: $currentStoreCode</info>");
         } catch (LocalizedException $e) {
             $output->writeln(sprintf(
                 '<error>%s</error>',
